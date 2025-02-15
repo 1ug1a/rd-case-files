@@ -1,4 +1,5 @@
 import api from '@/utils/api'
+import Level from '@/components/level'
 
 export default async function Index() {
   const q = "test"
@@ -8,7 +9,7 @@ export default async function Index() {
     q: q.trim(),
     query_by: 'song, authors, artist, tags, description',
     query_by_weights: '12, 8, 6, 5, 4',
-    per_page: 1,
+    per_page: 5,
     page: 1,
     filter_by: showingNonPRLevels
       ? 'approval:=[-1..20]'
@@ -23,11 +24,15 @@ export default async function Index() {
     params: searchParameters
   })
 
+  let levels = response.data.hits.map((level) => (
+    level.document
+  ))
+
   return (
     <div>
-      <ul>{response.data.hits.map((level) => (
-        <li key={level.document.id}>{JSON.stringify(level.document)}</li>
-      ))}</ul>
+      {levels.map((level) => (
+        <Level key={level.id} level={level} />
+      ))}
     </div>
   );
 }
