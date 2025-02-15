@@ -11,9 +11,12 @@ export default async function Index() {
     query_by_weights: '12, 8, 6, 5, 4',
     per_page: 10,
     page: 1,
+    filter_by: showingNonPRLevels
+      ? 'approval:=[-1..20]'
+      : 'approval:=[10..20]',
     sort_by: showingNonPRLevels
-        ? '_text_match:desc,last_updated:desc'
-        : '_text_match:desc,indexed:desc,last_updated:desc',
+      ? '_text_match:desc,last_updated:desc'
+      : '_text_match:desc,indexed:desc,last_updated:desc',
     num_typos: '2, 1, 1, 1, 0'
   }
   
