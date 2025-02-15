@@ -8,7 +8,7 @@ export default async function Index() {
     q: q.trim(),
     query_by: 'song, authors, artist, tags, description',
     query_by_weights: '12, 8, 6, 5, 4',
-    per_page: 10,
+    per_page: 1,
     page: 1,
     filter_by: showingNonPRLevels
       ? 'approval:=[-1..20]'
@@ -25,9 +25,9 @@ export default async function Index() {
 
   return (
     <div>
-      <p>{response.data.hits.map((level) => (
-        <ul key={level.document.id}>{JSON.stringify(level.document)}</ul>
-      ))}</p>
+      <ul>{response.data.hits.map((level) => (
+        <li key={level.document.id}>{JSON.stringify(level.document)}</li>
+      ))}</ul>
     </div>
   );
 }
