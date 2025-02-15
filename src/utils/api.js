@@ -1,5 +1,5 @@
 import { TYPESENSE_URL, TYPESENSE_API_KEY } from '@/utils/constants'
-import axios from 'axios'
+import axios from 'redaxios'
 
 const api = axios.create({
   baseURL: `${TYPESENSE_URL}/collections/levels/documents/`,

@@ -1,5 +1,4 @@
 import api from '@/utils/api'
-import axios from 'axios'
 
 export default async function Index() {
   const q = "test"
