@@ -2,6 +2,7 @@
 
 import Level from "./level"
 import api from '@/utils/api'
+import search from "@/utils/search"
 import { useState, useEffect } from 'react'
 
 export default function LevelById({ levelId }) {
@@ -13,13 +14,12 @@ export default function LevelById({ levelId }) {
     filter_by: `id:=${levelId}`
   }
 
-  const fetchLevels = async () => {
-    await api.get("/search", { params: searchParameters })
-    .then((response) => setLevels(response.data.hits.map((level) => (level.document))))
-    .catch((error) => console.error(error))
-  }
-  
   useEffect(() => {
+    const fetchLevels = async () => {
+      const response = await search(searchParameters)
+      setLevels(response)
+    }
+    
     fetchLevels()
   }, [])
 

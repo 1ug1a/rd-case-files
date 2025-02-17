@@ -41,5 +41,16 @@ export default function Level({ level, levelId }) {
     </div>
   );
   else
-  return <p>Loading {levelId}... if it's still loading, then check if the level ID is correct.</p>
+  return (
+    <div className="rounded-xl mb-1 last:mb-0 max-w-full" style={{background: `url(${level.image}) no-repeat center/cover`}}>
+      <Card className="bg-card/60">
+        <CardHeader className="mb-1">
+          <CardDescription>
+            <span className="mr-5">{levelId}</span>
+          </CardDescription>
+          <CardTitle className="whitespace-nowrap overflow-hidden text-ellipsis">Unknown Level</CardTitle>
+        </CardHeader>
+      </Card>
+    </div>
+  )
 }

@@ -42,6 +42,7 @@ export default function Index() {
   return (
     <div>
       <Group group={placeholder} />
+      <LevelSearch />
     </div>
   )
 }

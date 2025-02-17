@@ -2,6 +2,7 @@
 
 import api from '@/utils/api'
 import Level from "@/components/level"
+import search from '@/utils/search'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Input } from "@/components/ui/input"
 import { useState, useEffect } from 'react'
@@ -25,15 +26,14 @@ export default function LevelSearch() {
     num_typos: '2, 1, 1, 1, 0'
   }
   
-  const fetchLevels = async () => {
-    await api.get("/search", { params: searchParameters })
-    .then((response) => setLevels(response.data.hits.map((level) => (level.document))))
-    .catch((error) => console.error(error.ToJSON))
-  }
-  
   const [levels, setLevels] = useState([])
 
   useEffect(() => {
+    const fetchLevels = async () => {
+      const response = await search(searchParameters)
+      setLevels(response)
+    }
+    
     const delayDebounceFn = setTimeout(() => {
       fetchLevels()
     }, 300)
