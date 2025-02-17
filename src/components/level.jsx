@@ -9,23 +9,24 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 
-export default function Level({ level }) {
+export default function Level({ level, levelId }) {
+  if (level !== "")
   return (
-    <div className="mb-1 max-w-full">
-      <Card className="" style={{background: `linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url(${level.image}) no-repeat center/cover`}}>
+    <div className="rounded-xl mb-1 last:mb-0 max-w-full" style={{background: `url(${level.image}) no-repeat center/cover`}}>
+      <Card className="bg-card/60">
         <CardHeader>
           <CardDescription>
-            <span>{level.artist}</span>
+            <span className="mr-5">{level.artist}</span>
             <span className="float-right">
               {level.authors.map((author, idx) => (
                 author = author + ((idx != level.authors.length-1) ? ", " : "")
               ))}
             </span>
           </CardDescription>
-          <CardTitle>{level.song}</CardTitle>
+          <CardTitle className="whitespace-nowrap overflow-hidden text-ellipsis">{level.song}</CardTitle>
         </CardHeader>
-        <CardFooter className="footer">
-          <ScrollArea className="scroll">
+        <CardFooter className={level.tags.length !== 0 ? "" : "p-[1px]"}>
+          <ScrollArea className="">
             <div className="flex w-max space-x-1">
             {level.tags.map((tag) => (
               <Badge key={tag}>
@@ -38,5 +39,7 @@ export default function Level({ level }) {
         </CardFooter>
       </Card>
     </div>
-  )
+  );
+  else
+  return <p>Loading {levelId}... if it's still loading, then check if the level ID is correct.</p>
 }

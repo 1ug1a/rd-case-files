@@ -6,7 +6,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { Input } from "@/components/ui/input"
 import { useState, useEffect } from 'react'
 
-export default function LevelBox() {
+export default function LevelSearch() {
   const [query, setQuery] = useState("")
   const showingNonPRLevels = false
 
@@ -24,18 +24,12 @@ export default function LevelBox() {
       : '_text_match:desc,indexed:desc,last_updated:desc',
     num_typos: '2, 1, 1, 1, 0'
   }
+  
   const fetchLevels = async () => {
-      try {
-        const response = await api.get("/search", {
-          params: searchParameters
-        })
-        setLevels(response.data.hits.map((level) => (
-          level.document
-        )))
-      } catch (error) {
-        console.error('Error fetching levels:', error)
-      }
-    }
+    await api.get("/search", { params: searchParameters })
+    .then((response) => setLevels(response.data.hits.map((level) => (level.document))))
+    .catch((error) => console.error(error.ToJSON))
+  }
   
   const [levels, setLevels] = useState([])
 
@@ -48,9 +42,9 @@ export default function LevelBox() {
   }, [query])
 
   return (
-    <div className="w-[50vw]">
+    <div className="">
       <Input className="mb-5" type="text" value={query} onChange={(e) => setQuery(e.target.value)}/>
-      <ScrollArea className="w-full h-[30rem]">
+      <ScrollArea className="w-full">
         {levels.map((level) => (
           <Level key={level.id} level={level} />
         ))}
