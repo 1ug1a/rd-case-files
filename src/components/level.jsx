@@ -34,8 +34,8 @@ export default function Level({ level, levelId, tagVisibility }) {
             <CardTitle className="whitespace-nowrap overflow-hidden text-ellipsis">{level.song}</CardTitle>
           </CardHeader>
           <CardFooter className={(level.tags.length === 0) || (!tagVisibility) ? "p-[1px]" : ""}>
-            <ScrollArea className="">
-              <div className="flex w-max space-x-1">
+            <ScrollArea className="min-w-0">
+              <div className="flex w-max space-x-1 min-w-0">
               {(tagVisibility === true) ? level.tags.map((tag, idx) => (
                 <Badge key={level.id + '-' + tag + '-' + idx}>
                   {tag}

@@ -111,10 +111,10 @@ export default function SimpleEditor() {
       />
 
       <div className="flex mb-5 space-x-4">
-        <Button variant="outline" className="w-full" onClick={handleJsonCopy}>
+        <Button variant="outline" className="w-full flex-1" onClick={handleJsonCopy}>
           {isJsonCopied ? ("Copied!") : ("Copy Case File JSON")}
         </Button>
-        <Button className="w-full" onClick={handleLevelCopy}>
+        <Button className="w-full flex-1" onClick={handleLevelCopy}>
           {isLevelCopied ? ("Copied!") : ("Copy Level Downloads")}
         </Button>
       </div>

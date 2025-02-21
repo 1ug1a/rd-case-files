@@ -12,9 +12,9 @@ export default function LevelSearch() {
   const [query, setQuery] = useState("")
   const [minApproval, setMinApproval] = useState(10)
   const [page, setPage] = useState(1)
-  const [perPage, setPerPage] = useState(120)
+  const [perPage, setPerPage] = useState(48)
   const [tagVisibility, setTagVisibility] = useState(true)
-  const toggleTags = () => setTagVisibility(!tagVisibility);
+  const toggleTags = () => setTagVisibility(!tagVisibility)
 
   const searchParameters = {
     q: query.trim(),
@@ -45,13 +45,13 @@ export default function LevelSearch() {
   }, [query])
 
   return (
-    <div className="">
-      <Input className="mb-2" type="text" value={query} placeholder="Search..." onChange={(e) => setQuery(e.target.value)}/>
-      <div className="mb-5">
+    <div className="w-full">
+      <Input className="w-full mb-2 ml-4 mr-4 mt-0" type="text" value={query} placeholder="Search..." onChange={(e) => setQuery(e.target.value)}/>
+      <div className="mb-2 mx-4">
         <Button onClick={toggleTags}>Toggle Tags</Button>
       </div>
-      <ScrollArea className="h-[calc(100vh-150px)] w-full">
-        <div className="grid grid-flow-dense grid-cols-2 gap-x-4">
+      <ScrollArea className="h-[calc(100vh-6rem)] w-full p-4">
+        <div className="grid grid-flow-dense grid-cols-1 @md:grid-cols-2 @xl:grid-cols-3 gap-x-4">
           {levels.map((level) => (
             <Level key={"search"+level.id} level={level} tagVisibility={tagVisibility} />
           ))}
