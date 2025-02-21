@@ -3,52 +3,53 @@
 import Group from '@/components/group';
 import { useState } from 'react';
 import { Textarea } from "@/components/ui/textarea"
+import { Button } from './ui/button';
 
 export default function SimpleEditor() {
   const initialJson = {
-    "type": "group",
-    "name": "Group 1",
-    "description": "oh wow haha awesome",
-    "items": [
+    type: "group",
+    name: "Group 1",
+    description: "oh wow haha awesome",
+    items: [
       {
-        "type": "group",
-        "name": "Group 2",
-        "description": "toxy! toxy! toxy!",
-        "items": [
+        type: "group",
+        name: "Group 2",
+        description: "toxy! toxy! toxy!",
+        items: [
           {
-            "type": "level",
-            "id": "toxy-5ABtN28ouNr"
+            type: "level",
+            id: "toxy-5ABtN28ouNr"
           },
           {
-            "type": "level",
-            "id": "toxy-5ABtN28ouNr"
+            type: "level",
+            id: "toxy-5ABtN28ouNr"
           },
           {
-            "type": "level",
-            "id": "toxy-5ABtN28ouN"
+            type: "level",
+            id: "toxy-5ABtN28ouNr"
           }
         ]
       },
       {
-        "type": "note",
-        "name": "testing!",
-        "description": "this is a test"
+        type: "note",
+        name: "testing!",
+        description: "this is a test"
       },
       {
-        "type": "level",
-        "id": "espresso-8vyjFwpWUNc"
+        type: "level",
+        id: "espresso-8vyjFwpWUNc"
       }
     ]
   }
 
   const errorJson = {
-    "type": "group",
-    "name": "",
-    "items": [
+    type: "group",
+    name: "",
+    items: [
       {
-        "type": "note",
-        "name": "Invalid Data",
-        "description": "JSON could not be parsed."
+        type: "note",
+        name: "Invalid Data",
+        description: "JSON could not be parsed."
       }
     ]
   }
@@ -70,9 +71,37 @@ export default function SimpleEditor() {
       const parsedData = tryParse(event.target.value);
       setJsonData(event.target.value);
 
-      console.log("Parsed JSON:", parsedData);
+      // console.log("Parsed JSON:", parsedData);
   };
   
+  const [isJsonCopied, setIsJsonCopied] = useState(false)
+  const handleJsonCopy = async () => {
+    if (jsonData) {
+      try {
+        await navigator.clipboard.writeText(jsonData)
+        setIsJsonCopied(true)
+        setTimeout(() => setIsJsonCopied(false), 2000)
+      }
+      catch {}
+    }
+  }
+
+  const [isLevelCopied, setIsLevelCopied] = useState(false)
+  const handleLevelCopy = async () => {
+    if (jsonData) {
+      try {
+        const re = /(?<="id": ")(.+)(?=")/g
+        const idArray = jsonData.match(re)
+        const uniqueIds = [...new Set(idArray)];
+        const idString = uniqueIds.map(i => "https://codex.rhythm.cafe/" + i + ".rdzip").join('\n')
+        await navigator.clipboard.writeText(idString)
+        setIsLevelCopied(true)
+        setTimeout(() => setIsLevelCopied(false), 2000)
+      }
+      catch {}
+    }
+  }
+
   return (
     <div>
       <Textarea 
@@ -80,6 +109,15 @@ export default function SimpleEditor() {
         onChange={handleTextAreaChange}
         className="w-full mb-5 h-[150px]"
       />
+
+      <div className="flex mb-5 space-x-4">
+        <Button variant="outline" className="w-full" onClick={handleJsonCopy}>
+          {isJsonCopied ? ("Copied!") : ("Copy Case File JSON")}
+        </Button>
+        <Button className="w-full" onClick={handleLevelCopy}>
+          {isLevelCopied ? ("Copied!") : ("Copy Level Downloads")}
+        </Button>
+      </div>
 
       <Group group={tryParse(jsonData)} />
     </div>

@@ -44,7 +44,7 @@ export default function LevelSearch() {
   return (
     <div className="">
       <Input className="mb-5" type="text" value={query} placeholder="Search..." onChange={(e) => setQuery(e.target.value)}/>
-      <ScrollArea className="w-full">
+      <ScrollArea className="h-[calc(100vh-100px)] w-full flex-col">
         {levels.map((level) => (
           <Level key={"search"+level.id} level={level} />
         ))}
