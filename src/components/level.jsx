@@ -13,7 +13,7 @@ import { Button } from "./ui/button";
 import Link from "next/link"
 import { Download } from "lucide-react";
 
-export default function Level({ level, levelId }) {
+export default function Level({ level, levelId, tagVisibility }) {
   if (level !== "")
   return (
     <div className="flex space-x-1 mb-1 last:mb-0 w-full">
@@ -21,7 +21,7 @@ export default function Level({ level, levelId }) {
         <CopyButton levelId={level.id} />
       </div>
       <div className="rounded-xl w-full min-w-0" style={{background: `url(${level.image}) no-repeat center/cover`}}>
-        <Card className="bg-card/60">
+        <Card className="bg-card/60 h-full">
           <CardHeader>
             <CardDescription className="truncate">
               <span className="mr-5">{level.artist}</span>
@@ -33,14 +33,14 @@ export default function Level({ level, levelId }) {
             </CardDescription>
             <CardTitle className="whitespace-nowrap overflow-hidden text-ellipsis">{level.song}</CardTitle>
           </CardHeader>
-          <CardFooter className={level.tags.length !== 0 ? "" : "p-[1px]"}>
+          <CardFooter className={(level.tags.length === 0) || (!tagVisibility) ? "p-[1px]" : ""}>
             <ScrollArea className="">
               <div className="flex w-max space-x-1">
-              {level.tags.map((tag, idx) => (
+              {(tagVisibility === true) ? level.tags.map((tag, idx) => (
                 <Badge key={level.id + '-' + tag + '-' + idx}>
                   {tag}
                 </Badge>
-              ))}
+              )) : <></>}
               </div>
               <ScrollBar orientation="horizontal" className="no-scrollbar"/>
             </ScrollArea>

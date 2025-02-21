@@ -13,14 +13,14 @@ export default function CopyButton({ levelId }) {
   }
   return (
     <>
-      <Button variant="outline" className="flex-1 w-10" onClick={handleLevelCopy}>
+      <Button variant="outline" className="flex-1 w-9" onClick={handleLevelCopy}>
         {(isLevelCopied) ? (
           <Check className="h-4 w-4" />
         ) : (
           <ClipboardCopy className="h-4 w-4" />
         )}
       </Button>
-      <a href={"https://codex.rhythm.cafe/" + levelId + ".rdzip"} className={buttonVariants({ variant: "outline" }) + " flex-2 w-10"}>
+      <a href={"https://codex.rhythm.cafe/" + levelId + ".rdzip"} className={buttonVariants({ variant: "outline" }) + " flex-2 w-9"}>
         <Download className="h-4 w-4" />
       </a>
     </>
