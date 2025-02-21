@@ -12,7 +12,7 @@ import { Note } from "./note"
 export default function Group({ group }) {
   return (
     <div>
-      <Card className="bg-card/60 mb-4">
+      <Card className="bg-card/60 mb-4 mt-4">
         <CardHeader>
           <CardTitle className="whitespace-nowrap overflow-hidden text-ellipsis">{group["name"]}</CardTitle>
           <CardDescription>
@@ -23,7 +23,7 @@ export default function Group({ group }) {
           {group["items"].map((item, idx) => {
             switch(item["type"]) {
               case "group":
-                return <Group key={item["name"]} group={item} />
+                return <Group className="" key={item["name"]} group={item} />
               case "level":
                 return <LevelById key={item["id"] + "-" + idx} levelId={item["id"]} />
               case "note":

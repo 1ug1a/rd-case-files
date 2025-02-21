@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
-import CopyButton from "./copy-button";
+import LevelButtons from "./level-buttons";
 import { Button } from "./ui/button";
 import Link from "next/link"
 import { Download } from "lucide-react";
@@ -16,9 +16,9 @@ import { Download } from "lucide-react";
 export default function Level({ level, levelId, tagVisibility }) {
   if (level !== "")
   return (
-    <div className="flex space-x-1 mb-1 last:mb-0 w-full">
+    <div className="flex space-x-1 mb-1 w-full">
       <div className="flex flex-col space-y-1">
-        <CopyButton levelId={level.id} />
+        <LevelButtons levelId={level.id} />
       </div>
       <div className="rounded-xl w-full min-w-0" style={{background: `url(${level.image}) no-repeat center/cover`}}>
         <Card className="bg-card/60 h-full">
@@ -51,7 +51,7 @@ export default function Level({ level, levelId, tagVisibility }) {
   );
   else
   return (
-    <div className="rounded-xl mb-1 last:mb-0 max-w-full" style={{background: `url(${level.image}) no-repeat center/cover`}}>
+    <div className="rounded-xl mb-1 max-w-full" style={{background: `url(${level.image}) no-repeat center/cover`}}>
       <Card className="bg-card/60">
         <CardHeader className="mb-1">
           <CardDescription>

@@ -17,7 +17,7 @@ export default function LevelById({ levelId }) {
   useEffect(() => {
     const fetchLevels = async () => {
       const response = await search(searchParameters)
-      setLevels(response)
+      setLevels(response.hits)
     }
     
     fetchLevels()

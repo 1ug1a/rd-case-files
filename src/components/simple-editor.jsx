@@ -8,13 +8,17 @@ import { Button } from './ui/button';
 export default function SimpleEditor() {
   const initialJson = {
     type: "group",
-    name: "Group 1",
-    description: "oh wow haha awesome",
+    name: "Example Case File",
+    description: "It all starts with a group. You can add various items of differing types in the \"items\" array. (Note: The outermost element has to be a group. This is the only aspect of the format that is subject to change.)",
     items: [
       {
+        type: "level",
+        id: "disco-ni-HHarAN5mJWy"
+      },
+      {
         type: "group",
-        name: "Group 2",
-        description: "toxy! toxy! toxy!",
+        name: "Cool Levels",
+        description: "You can nest groups, by the way. ",
         items: [
           {
             type: "level",
@@ -22,18 +26,18 @@ export default function SimpleEditor() {
           },
           {
             type: "level",
-            id: "toxy-5ABtN28ouNr"
+            id: "addictio-N5fqCFLMaSG"
           },
           {
             type: "level",
-            id: "toxy-5ABtN28ouNr"
+            id: "color-ff-RhGF2Hy2Jic"
           }
         ]
       },
       {
         type: "note",
-        name: "testing!",
-        description: "this is a test"
+        name: "It's a note!",
+        description: "You can add notes as well."
       },
       {
         type: "level",

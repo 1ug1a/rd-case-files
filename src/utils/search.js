@@ -3,9 +3,9 @@ import api from "./api"
 export default async function search(searchParameters) {
     try {
         const response = await api.get("/search", { params: searchParameters })
-        const r = response.data.hits.map((level) => (level.document))
-        // console.log(r)
-        return r
+        const hits = response.data.hits.map((level) => (level.document))
+        const found = response.data.found
+        return {hits, found}
     }
     catch(error) {
         console.error(error)

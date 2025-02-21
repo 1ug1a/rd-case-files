@@ -11,7 +11,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 
 export default function Browse() {
   return (
-    <div className="flex h-screen w-full overflow-hidden">
+    <div className="flex h-screen w-full overflow-hidden p-4">
       <LevelSearch />
     </div>
   )

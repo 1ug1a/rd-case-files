@@ -8,9 +8,9 @@ import {
 
 export function Note({ note }) {
   return (
-    <Alert className="mb-4">
+    <Alert className="mb-4 bg-blue-200 dark:bg-blue-950">
       <StickyNote className="h-4 w-4" />
-      <AlertTitle>{note["name"]}</AlertTitle>
+      <AlertTitle className="font-semibold leading-none tracking-tight">{note["name"]}</AlertTitle>
       <AlertDescription>
         {note["description"]}
       </AlertDescription>
