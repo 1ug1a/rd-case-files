@@ -51,10 +51,12 @@ export default function LevelSearch() {
         <Button onClick={toggleTags}>Toggle Tags</Button>
       </div>
       <ScrollArea className="h-[calc(100vh-6rem)] w-full p-4">
-        <div className="grid grid-flow-dense grid-cols-1 @md:grid-cols-2 @xl:grid-cols-3 gap-x-4">
-          {levels.map((level) => (
-            <Level key={"search"+level.id} level={level} tagVisibility={tagVisibility} />
-          ))}
+        <div className="@container">
+          <div className="grid grid-flow-dense grid-cols-1 @3xl:grid-cols-2 @6xl:grid-cols-3 gap-x-4">
+            {levels.map((level) => (
+              <Level key={"search"+level.id} level={level} tagVisibility={tagVisibility} />
+            ))}
+          </div>
         </div>
       </ScrollArea>
     </div>
