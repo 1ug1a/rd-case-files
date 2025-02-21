@@ -1,6 +1,13 @@
 import Group from '@/components/group'
 import LevelSearch from '@/components/level-search'
 import LevelById from '@/components/level-by-id'
+import SimpleEditor from '@/components/simple-editor'
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable"
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 export default function Index() {
   const placeholder = {
@@ -40,9 +47,20 @@ export default function Index() {
   }
   
   return (
-    <div>
-      <Group group={placeholder} />
-      <LevelSearch />
+    <div className="flex h-screen w-full overflow-hidden">
+      <ResizablePanelGroup direction="horizontal" className="flex-1">
+        <ResizablePanel defaultSize={50} className="m-4">
+          <ScrollArea className="h-full w-full">
+            <SimpleEditor />
+          </ScrollArea>
+        </ResizablePanel>
+        <ResizableHandle />
+        <ResizablePanel defaultSize={50} className="m-4">
+          <ScrollArea className="h-full w-full">
+            <LevelSearch />
+          </ScrollArea>
+        </ResizablePanel>
+      </ResizablePanelGroup>
     </div>
   )
 }

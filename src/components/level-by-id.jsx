@@ -26,8 +26,8 @@ export default function LevelById({ levelId }) {
   if (levels.length != 0)
   return (
     <>
-      {levels.map((level) => (
-        <Level key={level.id} level={level} />
+      {levels.map((level, idx) => (
+        <Level key={level.id + "-" + idx} level={level} />
       ))}
     </>
   );

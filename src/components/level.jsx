@@ -28,8 +28,8 @@ export default function Level({ level, levelId }) {
         <CardFooter className={level.tags.length !== 0 ? "" : "p-[1px]"}>
           <ScrollArea className="">
             <div className="flex w-max space-x-1">
-            {level.tags.map((tag) => (
-              <Badge key={tag}>
+            {level.tags.map((tag, idx) => (
+              <Badge key={level.id + '-' + tag + '-' + idx}>
                 {tag}
               </Badge>
             ))}
