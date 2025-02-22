@@ -25,7 +25,10 @@ export default function Group({ group }) {
               case "group":
                 return <Group className="" key={item["name"]} group={item} />
               case "level":
-                return <LevelById key={item["id"] + "-" + idx} levelId={item["id"]} />
+                const trueId = (item["id"].includes("https://codex.rhythm.cafe") === true)
+                          ? item["id"].slice(26).slice(0,-6)
+                          : item["id"]
+                return <LevelById key={trueId + "-" + idx} levelId={trueId} />
               case "note":
                 return <Note key={item["name"]} note={item} />
               default:
