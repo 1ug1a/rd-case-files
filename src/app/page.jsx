@@ -10,42 +10,6 @@ import {
 import { ScrollArea } from '@/components/ui/scroll-area'
 
 export default function Index() {
-  const placeholder = {
-    "type": "group",
-    "name": "Group 1",
-    "description": "oh wow haha awesome",
-    "items": [
-      {
-        "type": "group",
-        "name": "Group 2",
-        "description": "toxy! toxy! toxy!",
-        "items": [
-          {
-            "type": "level",
-            "id": "toxy-5ABtN28ouNr"
-          },
-          {
-            "type": "level",
-            "id": "toxy-5ABtN28ouNr"
-          },
-          {
-            "type": "level",
-            "id": "toxy-5ABtN28ouN"
-          }
-        ]
-      },
-      {
-        "type": "note",
-        "name": "testing!",
-        "description": "this is a test"
-      },
-      {
-        "type": "level",
-        "id": "espresso-8vyjFwpWUNc"
-      }
-    ]
-  }
-  
   return (
     <div className="flex h-screen w-full overflow-hidden">
       <ResizablePanelGroup direction="horizontal" className="flex-1">
