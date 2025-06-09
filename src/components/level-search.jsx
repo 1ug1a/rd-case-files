@@ -52,7 +52,7 @@ export default function LevelSearch() {
       : '_text_match:desc,indexed:desc,last_updated:desc',
     num_typos: '2, 1, 1, 1, 0'
   }
-  
+
   const [levels, setLevels] = useState([])
   const fetchLevels = async () => {
     const response = await search(searchParameters)
@@ -71,8 +71,7 @@ export default function LevelSearch() {
   return (
     <div className="w-full">
       <div className="mb-2 ml-4 mr-4 mt-0 flex space-x-1">
-        
-        <Input className="" type="text" value={query} placeholder="Search..." onChange={(e) => setQuery(e.target.value)}/>
+        <Input className="" type="text" value={query} placeholder="Search..." onChange={(e) => {setPage(1); setTotalPages("..."); setQuery(e.target.value)}}/>
       </div>
       <div className="mb-2 mx-4 space-x-1">
         <Button onClick={prevPage} variant="outline" className="w-9 relative top-[3px]"><ChevronLeft /></Button>
