@@ -8,33 +8,33 @@ import {
 } from "@/components/ui/card"
 import LevelById from "./level-by-id"
 import { Note } from "./note"
+import GroupItem from "./group-item"
 
-export default function Group({ group }) {
+export default function Group({ node, onChange }) {
+  // console.log(node)
   return (
-    <div>
+    <div className="tree-group">
       <Card className="bg-card/60 mb-4 mt-4">
         <CardHeader>
-          <CardTitle className="whitespace-nowrap overflow-hidden text-ellipsis">{group["name"]}</CardTitle>
+          <CardTitle className="whitespace-nowrap overflow-hidden text-ellipsis">{node["name"]}</CardTitle>
           <CardDescription>
-            {group["description"]}
+            {node["description"] || ""}
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {group["items"].map((item, idx) => {
-            switch(item["type"]) {
-              case "group":
-                return <Group className="" key={item["name"]} group={item} />
-              case "level":
-                const trueId = (item["id"].includes("https://codex.rhythm.cafe") === true)
-                          ? item["id"].slice(26).slice(0,-6)
-                          : item["id"]
-                return <LevelById key={trueId + "-" + idx} levelId={trueId} />
-              case "note":
-                return <Note key={item["name"]} note={item} />
-              default:
-                return
-              }
-            }
+          {node.items.map(child => {
+            return child.type === "group" ? (
+              <Group
+                key={child.key}
+                node={child}
+              />
+            ) : (
+              <GroupItem
+                key={child.key}
+                item={child}
+              />
+            )
+          }
           )}
         </CardContent>
       </Card>

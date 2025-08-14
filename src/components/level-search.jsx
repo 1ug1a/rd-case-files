@@ -36,7 +36,7 @@ export default function LevelSearch() {
   const nextPage = () => setPage((page == totalPages) ? page : page+1)
   const prevPage = () => setPage((page == 1) ? page : page-1)
 
-  const [perPage, setPerPage] = useState(48)
+  const [perPage, setPerPage] = useState(24)
   const [tagVisibility, setTagVisibility] = useState(true)
   const toggleTags = () => setTagVisibility(!tagVisibility)
 
@@ -59,6 +59,32 @@ export default function LevelSearch() {
     setLevels(response.hits)
     setTotalPages(Math.ceil(response.found/perPage))
   }
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedPerPage = localStorage.getItem("perPage");
+      if (storedPerPage) {
+        setPerPage(parseInt(storedPerPage));
+      }
+
+      const storedTagVisibility = localStorage.getItem("tagVisibility");
+      if (storedTagVisibility !== null) {
+        setTagVisibility(storedTagVisibility === "true");
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem("perPage", perPage.toString());
+    }
+  }, [perPage]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem("tagVisibility", tagVisibility.toString());
+    }
+  }, [tagVisibility]);
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
@@ -93,12 +119,13 @@ export default function LevelSearch() {
           </SelectContent>
         </Select>
         <Button onClick={toggleTags}>Toggle Tags</Button>
+        <span className='px-2 text-sm'>Settings are stored in localstorage.</span>
       </div>
       <ScrollArea className="h-[calc(100vh-7rem)] w-full p-4">
         <div className="@container">
           <div className="grid grid-cols-1 @3xl:grid-cols-2 @6xl:grid-cols-3 gap-x-4">
             {(levels.length !== 0) ? levels.map((level) => (
-              <Level key={"search"+level.id} level={level} tagVisibility={tagVisibility} />
+              <Level key={"search."+level.id} level={level} tagVisibility={tagVisibility} />
             )):""}
           </div>
         </div>

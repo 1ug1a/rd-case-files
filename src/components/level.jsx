@@ -12,41 +12,19 @@ import LevelButtons from "./level-buttons";
 import { Button } from "./ui/button";
 import Link from "next/link"
 import { Download } from "lucide-react";
+import { DndContext, useDraggable} from '@dnd-kit/core';
+import RawLevel from "./raw-level";
+import DndLevel from "./dnd-level";
+import React from "react";
 
-export default function Level({ level, levelId, tagVisibility }) {
+function Level({ level, levelId, tagVisibility }) {  
   if (level !== "")
   return (
     <div className="flex space-x-1 mb-1 w-full">
       <div className="flex flex-col space-y-1">
         <LevelButtons levelId={level.id} />
       </div>
-      <div className="rounded-xl w-full min-w-0" style={{background: `url(${level.image}) no-repeat center/cover`}}>
-        <Card className="bg-card/60 h-full">
-          <CardHeader>
-            <CardDescription className="truncate">
-              <span className="mr-5">{level.artist}</span>
-              <span className="float-right">
-                {level.authors.map((author, idx) => (
-                  author = author + ((idx != level.authors.length-1) ? ", " : "")
-                ))}
-              </span>
-            </CardDescription>
-            <CardTitle className="whitespace-nowrap overflow-hidden text-ellipsis">{level.song}</CardTitle>
-          </CardHeader>
-          <CardFooter className={(level.tags.length === 0) || (!tagVisibility) ? "p-[1px]" : ""}>
-            <ScrollArea className="min-w-0">
-              <div className="flex w-max space-x-1 min-w-0">
-              {(tagVisibility === true) ? level.tags.map((tag, idx) => (
-                <Badge key={level.id + '-' + tag + '-' + idx}>
-                  {tag}
-                </Badge>
-              )) : <></>}
-              </div>
-              <ScrollBar orientation="horizontal" className="no-scrollbar"/>
-            </ScrollArea>
-          </CardFooter>
-        </Card>
-      </div>
+      <DndLevel level={level} tagVisibility={tagVisibility}/>
     </div>
   );
   else
@@ -63,3 +41,5 @@ export default function Level({ level, levelId, tagVisibility }) {
     </div>
   )
 }
+
+export default React.memo(Level)
